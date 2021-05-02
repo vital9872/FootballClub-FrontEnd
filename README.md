@@ -12,4 +12,4 @@ These instructions will get you a copy of the project up and running on your loc
 3. Next run "npm start"
 4. Go to the (http://localhost:4200/) in your browser
   
-Though there are two GitHub projects: [FootballClub-BackEnd]() for back-end part and [FootballClub-FrontEnd](https://github.com/vital9872/FootballClub-FrontEnd.git) for front-end part
+Though there are two GitHub projects: [FootballClub-BackEnd](https://github.com/vital9872/FootballClub-BackEnd.git) for back-end part and [FootballClub-FrontEnd](https://github.com/vital9872/FootballClub-FrontEnd.git) for front-end part
