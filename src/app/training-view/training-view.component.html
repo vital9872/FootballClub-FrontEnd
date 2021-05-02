@@ -1,0 +1,118 @@
+<div style="background-color: #f6f9fa; padding-bottom: 3%;" class="container user-info mt-3 mb-5">
+    <h1 class="mb-3 text-center font-weight-bold">Training details</h1>
+    <div class="row mb-4">
+        <div class="col-5">Training type </div>
+        <div class="col">
+            {{ training?.trainingType }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Start date</div>
+        <div class="col">
+            {{ training?.date }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Duration</div>
+        <div class="col">
+            {{ training?.duration }}
+        </div>
+    </div>
+    <ng-container *ngIf="training">
+        <h3 class="text-center font-weight-bold mt-5">Players</h3>
+        <table class="table">
+            <thead class="row">
+                <th class="col-3">Player</th>
+                <th class="col-1">Shooting</th>
+                <th class="col-1">Speed</th>
+                <th class="col-1">Dribling</th>
+                <th class="col-1">Defensive</th>
+                <th class="col-5"><span class="sr-only"></span></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pm of playerTraining" class="row">
+                    <td class="col-3 align-middle">
+                        <span class="d-inline-block text-truncate w-100">{{pm.player?.firstName}} {{pm.player?.lastName}}</span>
+                    </td>
+                    <td class="col-1">
+                        <span class="d-inline-block text-truncate w-100">{{pm.shooting}}</span> 
+            </td>
+            <td class="col-1">
+                <span class="d-inline-block text-truncate w-100">{{pm.speed}}</span> 
+    </td>
+    <td class="col-1">
+        <span class="d-inline-block text-truncate w-100">{{pm.dribling}}</span> 
+</td>
+<td class="col-1">
+    <span class="d-inline-block text-truncate w-100">{{pm.defensive}}</span> 
+</td>
+            <td class="col-5 py-2">
+              <div  class="row justify-content-end w-100">
+                <ng-container>
+                  <button
+                    class="btn btn-small btn-danger col-4"
+                    (click)="deletePlayerTraining(pm)"
+                  >
+                  Delete
+                  </button>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+    <form class="border border-light form-container col-sm mt-3" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row mb-4">
+            <div class="mt-3 col">
+                <label for="TrainingFormTournament">Player</label>
+                <select class="form-select form-control" formControlName="player" name="player">
+                    <option *ngFor="let item of players;" [value]="item.id">
+                        {{item?.firstName}} {{item?.lastName}}
+                    </option>
+                  </select>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Shooting<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="shooting"
+                       name="shooting"></div>
+              <div *ngIf="form.get('shooting').errors && form.get('shooting').touched">
+                <div *ngIf="form.get('shooting').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Speed<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="speed"
+                       name="speed"></div>
+              <div *ngIf="form.get('speed').errors && form.get('speed').touched">
+                <div *ngIf="form.get('speed').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Dribling<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="dribling"
+                       name="dribling"></div>
+              <div *ngIf="form.get('dribling').errors && form.get('dribling').touched">
+                <div *ngIf="form.get('dribling').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Defensive<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="defensive"
+                       name="defensive"></div>
+              <div *ngIf="form.get('defensive').errors && form.get('defensive').touched">
+                <div *ngIf="form.get('defensive').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+        </div> 
+        <div class="text-right mt-3" style="margin-top: 45px;">
+            <button class="btn btn-info" type="submit" name="submit">
+              Add
+            </button>
+          </div>
+    </form>
+</div>

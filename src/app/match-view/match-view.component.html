@@ -1,0 +1,117 @@
+<div style="background-color: #f6f9fa; padding-bottom: 3%;" class="container user-info mt-3">
+    <h3 class="mb-3 text-center font-weight-bold">Match details</h3>
+    <div class="row mb-4">
+        <div class="col-5">Your team goals: </div>
+        <div class="col">
+            {{ match?.team1Goals }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Enemy team goals: </div>
+        <div class="col">
+            {{ match?.team2Goals }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Enemy</div>
+        <div class="col">
+            {{ match?.clubEnemyName }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Date</div>
+        <div class="col">
+            {{ match?.startDate}}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Location</div>
+        <div class="col">
+            {{ match?.matchLocation}}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Ticket Sales</div>
+        <div class="col">
+            {{ match?.ticketSales }}
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-5">Outcome</div>
+        <div class="col">
+            {{ match?.outcome}}
+        </div>
+    </div>
+    <ng-container *ngIf="match">
+        <h3 class="text-center font-weight-bold mt-5">Players</h3>
+        <table class="table">
+            <thead class="row">
+                <th class="col-3">Player</th>
+                <th class="col-2">Goals</th>
+                <th class="col-2">Assists</th>
+                <th class="col-5"><span class="sr-only"></span></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pm of playerMatches" class="row">
+                    <td class="col-3 align-middle">
+                        <span class="d-inline-block text-truncate w-100">{{pm.player.firstName}} {{pm.player.lastName}}</span>
+                    </td>
+                    <td class="col-2">
+                        <span class="d-inline-block text-truncate w-100">{{pm.goals}}</span> 
+            </td>
+            <td class="col-2">
+                <span class="d-inline-block text-truncate w-100">{{pm.assists}}</span> 
+    </td>
+            <td class="col-5 py-2">
+              <div  class="row justify-content-end w-100">
+                <ng-container>
+                  <button
+                    class="btn btn-small btn-danger col-4"
+                    (click)="deletePlayerMatch(pm)"
+                  >
+                  Delete
+                  </button>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+    <form class="form-container col-sm mt-3" style="width: 80%;" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row mb-4">
+            <div class="mt-3 col">
+                <label for="MatchFormTournament">Player</label>
+                <select class="form-select form-control" formControlName="player" name="player">
+                    <option *ngFor="let item of players;" [value]="item.id">
+                        {{item.firstName}} {{item.lastName}}
+                    </option>
+                  </select>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Goals<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="goals"
+                       name="goals"></div>
+              <div *ngIf="form.get('goals').errors && form.get('goals').touched">
+                <div *ngIf="form.get('goals').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+            <div class="col mt-3">
+                <label for="PlayerFormSalary">Assists<span class="asterisk"> *</span></label>
+                <input type="number" id="PlayerFormSalary" class="form-control" formControlName="assists"
+                       name="assists"></div>
+              <div *ngIf="form.get('assists').errors && form.get('assists').touched">
+                <div *ngIf="form.get('assists').errors?.required" class="validation-error">
+                    Ticket sale is required
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-info" type="submit" name="submit" style="margin-top: 45px">
+                  Add
+                </button>
+              </div>
+        </div> 
+
+    </form>
+</div>

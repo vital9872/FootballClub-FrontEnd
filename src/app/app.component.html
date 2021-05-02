@@ -1,0 +1,30 @@
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <i style="color:azure; margin-top: 10px;" class="fas fa-futbol"></i>
+        <a class="nav-item nav-link " routerLink="/">Football club management</a>
+        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
+
+<!-- main app container -->
+<div class="container">
+    <p style="text-align: center; font-size: 40px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:whitesmoke;
+    width: 100%;">
+        Club management
+    </p>
+    <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<footer class="page-footer font-small gradient-background bg-dark">
+
+    <div class="container">
+        <div class="col">
+            <div class="text-center py-3">
+                © 2021 by Vitalii Yartym
+            </div>
+        </div>
+    </div>
+</footer>

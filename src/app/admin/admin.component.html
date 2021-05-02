@@ -1,0 +1,27 @@
+﻿<div class="card mt-4">
+    <div class="card-header row">
+        <h4 class=" col-sm-5">Admin</h4>
+        <a routerLink="/add-user" class="col-sm-2 btn btn-md px-3 my-0 mr-0" style="width: 50px; margin-left: 15%;">
+            <i class="fas fa-plus pr-1"></i>
+            <span class="button-label">Add user</span>
+        </a>
+    </div>
+
+    <table class="table">
+        <tr><th>Email</th><th>Role</th><th></th></tr>
+            <tr *ngFor="let user of users">
+                <td>{{user.userName}}</td>
+                <td>{{user.role}}</td>
+                <td>
+                    <a routerLink="/edit-user" (click)="editUser(user)" class="btn btn-sm btn-primary">Edit</a>
+                    <button (click)="deleteUser(user.userName)" type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+    </table>
+    <div class="card-body">
+        <p>This page can be accessed <u>only by administrators</u>.</p>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    </div>
+</div>

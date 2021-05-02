@@ -1,0 +1,12 @@
+.small-screen{
+    display:none
+  }
+  @media(max-width: 525px){
+    .large-screen{
+      display: none;
+    }
+    .small-screen{
+      display: inline;
+    }
+  }
+  

@@ -1,0 +1,86 @@
+<ng-template appRef>
+    <!--Add Form-->
+  </ng-template>
+  
+  
+  
+  <div class="container my-5">
+    <section>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-list">
+            <div class="card-header white d-flex  align-items-center py-3">
+              <p class="h5-responsive font-weight-bold mb-1 mr-2">
+                Matches
+              </p>
+  
+              <!-- header search -->
+              <div class="col">
+                <form
+                  (ngSubmit)="search(searchField.value)"
+                  [formGroup]="searchForm"
+                >
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Search"
+                      aria-label="Search"
+                      formControlName="searchField"
+                      [ngClass]="{
+                        'is-invalid': searchField.touched && searchField.errors
+                      }"
+                    />
+                    <div class="input-group-append">
+                      <button class="input-group-text btn-light" type="submit">
+                        <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+  
+              <!-- header buttons -->
+              <ul class="list-unstyled d-flex align-items-center mb-1">
+                <li>
+                  <button class="btn btn-md px-3 my-0 mr-0" (click)="addMatch()">
+                    <i class="fas fa-plus pr-1"></i>
+                    <span class="button-label">Add</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+  
+            <!-- Table -->
+            <div class="card-body">
+              <app-admin-table
+                [data]="matches"
+                [dataProperties]="matchProperties"
+                [displayColumns]="matchDisplayColumns"
+                [(selectedRows)]="selectedRows"
+                [(sortParams)]="queryParams.sort"
+                (editClicked)="editMatch($event)"
+                [canEdit]="true"
+                [canDelete]="true"
+                [canView]="true"
+                (deleteClicked)="deleteMatch($event)"
+                (viewClicked)="onViewButtonClicked($event)"
+                (selectedHeaderChange)="onSortHeaderChanged()"
+                >
+              </app-admin-table>
+  
+              <app-pagination
+              *ngIf="matches && matches.length > 0"
+              [arraySize]="totalSize"
+              [pageSize]="queryParams.pageSize"
+              [selectedPage]="queryParams.page"
+              (PageChange)="onPageChanged($event)"
+            >
+            </app-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

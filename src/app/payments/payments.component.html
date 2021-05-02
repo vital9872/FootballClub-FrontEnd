@@ -1,0 +1,76 @@
+<ng-template appRef>
+    <!--Add Form-->
+  </ng-template>
+  
+  
+  
+  <div class="container my-5">
+    <section>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-list">
+            <div class="card-header white d-flex  align-items-center py-3">
+              <p class="h5-responsive font-weight-bold mb-1 mr-2">
+                Payments
+              </p>
+  
+              <!-- header buttons -->
+              <ul class="list-unstyled d-flex align-items-center mb-1">
+                <li>
+                  <button class="btn btn-md px-3 my-0 mr-0" (click)="addPayment()">
+                    <i class="fas fa-plus pr-1"></i>
+                    <span class="button-label">Add</span>
+                  </button>
+                </li>
+                <li>
+                    <button class="btn btn-md px-3 my-0 mr-0" (click)="addPlayerPayment()">
+                      <i class="fas fa-plus pr-1"></i>
+                      <span class="button-label">Add player payment</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="btn btn-md px-3 my-0 mr-0" (click)="addMatchPayment()">
+                      <i class="fas fa-plus pr-1"></i>
+                      <span class="button-label">Add match payment</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="btn btn-md px-3 my-0 mr-0" (click)="printPayment()">
+                      <i class="fas fa-print pr-1"></i>
+                    </button>
+                  </li>
+              </ul>
+            </div>
+  
+            <!-- Table -->
+            <div class="card-body" id="contentToConvert">
+              <app-admin-table
+                [data]="payments"
+                [dataProperties]="paymentProperties"
+                [displayColumns]="paymentDisplayColumns"
+                [(selectedRows)]="selectedRows"
+                [(sortParams)]="queryParams.sort"
+                (editClicked)="editPayment($event)"
+                [canEdit]="true"
+                [canDelete]="true"
+                (deleteClicked)="deletePayment($event)"
+                (viewClicked)="onViewButtonClicked($event)"
+                (selectedHeaderChange)="onSortHeaderChanged()"
+                >
+              </app-admin-table>
+  
+              <app-pagination
+              *ngIf="payments && payments.length > 0"
+              [arraySize]="totalSize"
+              [pageSize]="queryParams.pageSize"
+              [selectedPage]="queryParams.page"
+              (PageChange)="onPageChanged($event)"
+            >
+            </app-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

@@ -1,0 +1,61 @@
+<section class="d-flex justify-content-center row justify-content-center">
+
+    <form class="border border-light form-container col-sm" [formGroup]="form" (ngSubmit)="submit()">
+      <h3 class="text-center p-2">
+        <strong>{{title}}</strong>
+      </h3>
+      <div class="form">
+        <div class="mt-2">
+          <label for="BroadcastFormName">Name<span class="asterisk"> *</span></label>
+          <input type="text" id="BroadcastFormName" class="form-control" formControlName="name"
+                 name="name">
+        </div>
+        <div *ngIf="form.get('name').errors && form.get('name').touched">
+          <div *ngIf="form.get('name').errors?.required" class="validation-error">
+            Name is required
+          </div>
+          <div *ngIf="form.get('name').errors.minlength" class="validation-error">
+            Name minlength: {{form.get('name').errors?.minlength?.requiredLength}}
+          </div>
+          <div *ngIf="form.get('name').errors.maxlength" class="validation-error">
+            Name maxlength: {{form.get('name').errors?.maxlength?.requiredLength }}
+          </div>
+        </div>
+  
+        <div class="mt-3">
+          <label for="BroadcastFormPayment">Payment<span class="asterisk"> *</span></label>
+          <input type="number" id="BroadcastFormPayment" class="form-control" formControlName="payment"
+                 name="payment"></div>
+        <div *ngIf="form.get('payment').errors && form.get('payment').touched">
+          <div *ngIf="form.get('payment').errors?.required" class="validation-error">
+            Payment is required
+          </div>
+          <div *ngIf="form.get('payment').errors.minlength" class="validation-error">
+            Payment minlength: {{form.get('payment').errors?.minlength?.requiredLength}}
+          </div>
+          <div *ngIf="form.get('payment').errors.maxlength" class="validation-error">
+            Payment maxlength: {{form.get('payment').errors?.maxlength?.requiredLength }}
+          </div>
+          <div *ngIf="form.get('payment').errors.pattern" class="validation-error">
+            Payment is not valid
+          </div>
+        </div>
+        <div class="mt-4">
+            <label for="BroadcastFormTournament">Tournament type</label>
+            <select class="form-select form-control" formControlName="tournament" name="tournament">
+                <option *ngFor="let item of tournaments;">
+                    {{item.name}}
+                </option>
+              </select>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn btn-info" type="submit" name="submit">
+          {{submitButtonText}}
+        </button>
+        <input type="button" class="btn" (click)="cancel()" value="Cancel"/>
+      </div>
+    </form>
+    
+  </section>
+  
